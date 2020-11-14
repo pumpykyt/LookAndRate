@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+  font-family: 'Knewave', cursive;
+  font-size: 31px;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.navbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 5px;
+  background-color: #1A1A1D;
+  color: white;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 15px;
+}
+
+.logout{
+  cursor: pointer;
+}
