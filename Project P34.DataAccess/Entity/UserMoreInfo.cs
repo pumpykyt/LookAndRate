@@ -17,6 +17,8 @@ namespace Project_P34.DataAccess.Entity
         public string Address { get; set; }
         [Required]
         public int Age { get; set; }
+        public string Description { get; set; }
+        public virtual ICollection<Review> reviewUser { get; set; }
         public virtual User User { get; set; }
     }
 }

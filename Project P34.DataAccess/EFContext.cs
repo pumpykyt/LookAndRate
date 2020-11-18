@@ -10,8 +10,10 @@ namespace Project_P34.DataAccess
     public class EFContext : IdentityDbContext<User>
     {
         public EFContext(DbContextOptions<EFContext> options): base(options) { }
-
         public DbSet<UserMoreInfo> userMoreInfos { get; set; }
+        public DbSet<Movie> movies { get; set; }
+        public DbSet<Announcement> announcements { get; set; }
+        public DbSet<Actor> actors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

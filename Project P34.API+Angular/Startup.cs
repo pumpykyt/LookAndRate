@@ -34,7 +34,7 @@ namespace Project_P34.API_Angular
             services.AddCors();
             services.AddDbContext<EFContext>(
                     opt => opt.UseSqlServer(Configuration["ConnectionString"],
-                    b => b.MigrationsAssembly("Project P34.API+Angular"))
+                    b => b.MigrationsAssembly("LookAndRate.API+Angular"))
                );
 
             services.AddIdentity<User, IdentityRole>()

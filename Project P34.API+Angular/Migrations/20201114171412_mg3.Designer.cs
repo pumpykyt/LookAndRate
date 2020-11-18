@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_P34.DataAccess;
 
 namespace Project_P34.API_Angular.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20201114171412_mg3")]
+    partial class mg3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("ActorMovie", b =>
-                {
-                    b.Property<int>("actorFilmsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("filmActorsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("actorFilmsId", "filmActorsId");
-
-                    b.HasIndex("filmActorsId");
-
-                    b.ToTable("ActorMovie");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -165,33 +152,6 @@ namespace Project_P34.API_Angular.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Project_P34.DataAccess.Entity.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Fathername")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tblActors");
-                });
-
             modelBuilder.Entity("Project_P34.DataAccess.Entity.Announcement", b =>
                 {
                     b.Property<int>("Id")
@@ -229,22 +189,13 @@ namespace Project_P34.API_Angular.Migrations
                     b.Property<int>("Budget")
                         .HasColumnType("int");
 
-                    b.Property<string>("Composer")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CountEpisodes")
+                        .HasColumnType("int");
 
                     b.Property<int>("CountViews")
                         .HasColumnType("int");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Director")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Length")
@@ -253,58 +204,21 @@ namespace Project_P34.API_Angular.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Operator")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OriginalName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PictureUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
-                    b.Property<string>("Slogan")
+                    b.Property<string>("TrailerUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TrailerUrl")
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tblMovies");
-                });
-
-            modelBuilder.Entity("Project_P34.DataAccess.Entity.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Mark")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("tblReviews");
                 });
 
             modelBuilder.Entity("Project_P34.DataAccess.Entity.User", b =>
@@ -384,9 +298,6 @@ namespace Project_P34.API_Angular.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -394,21 +305,6 @@ namespace Project_P34.API_Angular.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tblUserMoreInfo");
-                });
-
-            modelBuilder.Entity("ActorMovie", b =>
-                {
-                    b.HasOne("Project_P34.DataAccess.Entity.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("actorFilmsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project_P34.DataAccess.Entity.Actor", null)
-                        .WithMany()
-                        .HasForeignKey("filmActorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -473,23 +369,6 @@ namespace Project_P34.API_Angular.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("Project_P34.DataAccess.Entity.Review", b =>
-                {
-                    b.HasOne("Project_P34.DataAccess.Entity.Movie", "reviewMovie")
-                        .WithMany("reviews")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project_P34.DataAccess.Entity.UserMoreInfo", "userReview")
-                        .WithMany("reviewUser")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("reviewMovie");
-
-                    b.Navigation("userReview");
-                });
-
             modelBuilder.Entity("Project_P34.DataAccess.Entity.UserMoreInfo", b =>
                 {
                     b.HasOne("Project_P34.DataAccess.Entity.User", "User")
@@ -504,18 +383,11 @@ namespace Project_P34.API_Angular.Migrations
             modelBuilder.Entity("Project_P34.DataAccess.Entity.Movie", b =>
                 {
                     b.Navigation("Announcement");
-
-                    b.Navigation("reviews");
                 });
 
             modelBuilder.Entity("Project_P34.DataAccess.Entity.User", b =>
                 {
                     b.Navigation("UserMoreInfo");
-                });
-
-            modelBuilder.Entity("Project_P34.DataAccess.Entity.UserMoreInfo", b =>
-                {
-                    b.Navigation("reviewUser");
                 });
 #pragma warning restore 612, 618
         }
