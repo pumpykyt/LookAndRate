@@ -175,6 +175,18 @@ namespace Project_P34.API_Angular.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("BirthYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountFilms")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Fathername")
                         .HasColumnType("nvarchar(max)");
 
@@ -274,6 +286,26 @@ namespace Project_P34.API_Angular.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tblMovies");
+                });
+
+            modelBuilder.Entity("Project_P34.DataAccess.Entity.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("ActorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.ToTable("tblPhotos");
                 });
 
             modelBuilder.Entity("Project_P34.DataAccess.Entity.Review", b =>
@@ -473,6 +505,17 @@ namespace Project_P34.API_Angular.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("Project_P34.DataAccess.Entity.Photo", b =>
+                {
+                    b.HasOne("Project_P34.DataAccess.Entity.Actor", "photoActor")
+                        .WithMany("Photos")
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("photoActor");
+                });
+
             modelBuilder.Entity("Project_P34.DataAccess.Entity.Review", b =>
                 {
                     b.HasOne("Project_P34.DataAccess.Entity.Movie", "reviewMovie")
@@ -499,6 +542,11 @@ namespace Project_P34.API_Angular.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Project_P34.DataAccess.Entity.Actor", b =>
+                {
+                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("Project_P34.DataAccess.Entity.Movie", b =>

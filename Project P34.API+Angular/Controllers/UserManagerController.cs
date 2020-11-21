@@ -115,7 +115,6 @@ namespace Project_P34.API_Angular.Controllers
             return model;
         }
 
-
         [HttpPost("editUser/{id}")]
         public ResultDto EditUser([FromRoute]string id, [FromBody]UserItemDTO model)
         {
@@ -135,6 +134,5 @@ namespace Project_P34.API_Angular.Controllers
             };
 
         }
-
     }
 }
