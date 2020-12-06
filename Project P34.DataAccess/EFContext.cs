@@ -15,6 +15,7 @@ namespace Project_P34.DataAccess
         public DbSet<Announcement> announcements { get; set; }
         public DbSet<Actor> actors { get; set; }
         public DbSet<Photo> photos { get; set; }
+        public DbSet<Review> reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

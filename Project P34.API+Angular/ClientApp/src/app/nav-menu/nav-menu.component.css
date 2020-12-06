@@ -1,40 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-  font-family: 'Knewave', cursive;
-  font-size: 31px;
+.my-header{
+  background-color: #3F403F;
+  height: 70px;
 }
 
-html {
-  font-size: 14px;
+.logoicon{
+  width: 50px;
+  height: 50px;
+  background-color: #274156;
+  border-radius: 15px;
+  padding: 10px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
+.li-icon{
+  margin-right: 20px;
+  height: 50px !important;
+}
+
+.ulmenu li{
+  display: inline;
+  float: left;
+  margin-top: 10px;
+  display: table-cell;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 50px;
+}
+
+ul{
+  justify-content: center;
+}
+
+.ul-links li{
+  display: table-cell;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 50px;
+  float: right;
+  margin-left: 180px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+@media screen and (max-width: 1650px){
+  .ul-links li{
+    font-size: 15px;
+    margin-left: 90px;
+  }
+
+  .logoicon{
+    width: 50px;
+    height: 50px;
+  }
+
+  .ulmenu li{
+    line-height: 50px;
   }
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+@media screen and (max-width: 1080px){
+  .ul-links li{
+    font-size: 10px;
+    margin-left: 90px;
+  }
+
+  .logoicon{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .ulmenu li{
+    line-height: 40px;
+    font-size: 15px;
+  }
 }
 
-.navbar{
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 5px;
-  background-color: #1A1A1D;
-  color: white;
-  font-family: 'Merriweather Sans', sans-serif;
-  font-size: 15px;
-}
+@media screen and (max-width: 920px){
+  .ulmenu li{
+    margin-left: 30px;
+    line-height: 40px;
+    font-size: 15px;
+  }
 
-.logout{
-  cursor: pointer;
+  .li2{
+    margin-left: 5px;
+  }
 }

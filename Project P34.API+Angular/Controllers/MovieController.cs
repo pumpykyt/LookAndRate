@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project_IDA.DTO.Models.Result;
 using Project_P34.DataAccess;
 using Project_P34.DataAccess.Entity;
@@ -16,36 +18,22 @@ namespace Project_P34.API_Angular.Controllers
     public class MovieController : ControllerBase
     {
         private readonly EFContext _context;
-        public MovieController(EFContext context)
+        private readonly IMapper _mapper;
+        public MovieController(EFContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpPost("add")]
-        public ResultDto addMovie([FromBody]MovieItemDTO model)
+        public async Task<ResultDto> addMovie([FromBody]MovieDTO model)
         {
             try
             {
-                var tmp = new Movie();
-                tmp.Id = model.Id;
-                tmp.Name = model.Name;
-                tmp.Rating = model.Rating;
-                tmp.Country = model.Country;
-                tmp.Budget = model.Budget;
-                tmp.CountViews = model.CountViews;
-                tmp.Director = model.Director;
-                tmp.Operator = model.Operator;
-                tmp.Composer = model.Composer;
-                tmp.Genre = model.Genre;
-                tmp.Description = model.Description;
-                tmp.PictureUrl = model.PictureUrl;
-                tmp.TrailerUrl = model.TrailerUrl;
-                tmp.Slogan = model.Slogan;
-                tmp.OriginalName = model.OriginalName;
-                tmp.Length = model.Length;
-                tmp.filmActors = model.filmActors.ToList();
-                _context.movies.Add(tmp);
-                _context.SaveChanges();
+                var obj = _mapper.Map<MovieDTO, Movie>(model);
+
+                await _context.AddAsync(obj);
+                await _context.SaveChangesAsync();
 
                 return new ResultDto
                 {
@@ -67,62 +55,44 @@ namespace Project_P34.API_Angular.Controllers
         }
 
         [HttpGet("get/{id}")]
-        public MovieItemDTO getFilm([FromRoute]int id)
+        public async Task<MovieDTO> getFilm([FromRoute]int id)
         {
-            var el = _context.movies.FirstOrDefault(t => t.Id == id);
-            var obj = new MovieItemDTO
-            {
-                Id = el.Id,
-                Name = el.Name,
-                Rating = el.Rating,
-                Country = el.Country,
-                Budget = el.Budget,
-                CountViews = el.CountViews,
-                Director = el.Director,
-                Operator = el.Operator,
-                Composer = el.Composer,
-                Genre = el.Genre,
-                Description = el.Description,
-                PictureUrl = el.PictureUrl,
-                TrailerUrl = el.TrailerUrl,
-                Slogan = el.Slogan,
-                OriginalName = el.OriginalName,
-                Length = el.Length,
-                filmActors = el.filmActors.ToList()
-            };
-
-            return obj;
+            var temp = await _context.movies.FirstOrDefaultAsync(t => t.Id == id);
+            return _mapper.Map<Movie, MovieDTO>(temp);
         }
 
 
-        [HttpGet("get")]
-        public IEnumerable<MovieItemDTO> getFilms()
+        [HttpGet]
+        public async Task<IEnumerable<MovieDTO>> getFilms()
         {
-            var list = new List<MovieItemDTO>();
-            foreach (var el in _context.movies)
+            var entities = await _context.movies.ToListAsync();
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
+        }
+
+        [HttpPost("rate")]
+        public async Task<ResultDto> rateMovie([FromBody]ReviewDTO model)
+        {
+            var movie = await _context.movies.FirstOrDefaultAsync(t => t.Id == model.MovieId);
+
+            if(movie.Rating == 0)
             {
-                var tmp = new MovieItemDTO();
-                tmp.Id = el.Id;
-                tmp.Name = el.Name;
-                tmp.Rating = el.Rating;
-                tmp.Country = el.Country;
-                tmp.Budget = el.Budget;
-                tmp.CountViews = el.CountViews;
-                tmp.Director = el.Director;
-                tmp.Operator = el.Operator;
-                tmp.Composer = el.Composer;
-                tmp.Genre = el.Genre;
-                tmp.Description = el.Description;
-                tmp.PictureUrl = el.PictureUrl;
-                tmp.TrailerUrl = el.TrailerUrl;
-                tmp.Slogan = el.Slogan;
-                tmp.OriginalName = el.OriginalName;
-                tmp.Length = el.Length;
-                tmp.filmActors = el.filmActors.ToList();
-                list.Add(tmp);
+                movie.Rating = model.Mark;
             }
+            if(movie.Rating > 0)
+            {
+                movie.Rating = (float)(movie.Rating + model.Mark / 2);
+            } 
+                
+            var obj = _mapper.Map<ReviewDTO, Review>(model);
+            await _context.reviews.AddAsync(obj);
+            await _context.SaveChangesAsync();
 
-            return list;
+            return new ResultDto
+            {
+                Message = "Posted",
+                Status = 200
+            };
         }
+
     }
 }

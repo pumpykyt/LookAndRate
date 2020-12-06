@@ -1,48 +1,18 @@
-<header>
-  <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark">
-    <a class="navbar-brand">Look&Rate</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" [routerLink]="['/']">
-            <i class="fa fa-home"></i>
-            Home
-            <span class="sr-only">(current)</span>
-            </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa fa-envelope-o">
-              <span class="badge badge-danger">11</span>
-            </i>
-            Link
-          </a>
-        </li>
+<div class="my-header">
+  <div class="custom-container">
+    <ul class="ulmenu">
+      <li class="li-icon">
+        <img class="logoicon" src="https://www.flaticon.com/svg/static/icons/svg/2933/2933170.svg"/>
+      </li>
+      <li class="li2">
+        Look&Rate
+      </li>
+      <ul class="ul-links">
+        <li>Login</li>
+        <li>Register</li>
+        <li>Contacts</li>
+        <li>Main</li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <ul class="navbar-nav flex-grow">
-        <li *ngIf="isLoggedIn === false" class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-white" [routerLink]="['login']">Login</a>
-        </li>
-        <li *ngIf="isLoggedIn === false" class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-white" [routerLink]="['register']">Register</a>
-        </li>
-        <li *ngIf="isLoggedIn === true" class="nav-item logout">
-          <a class="nav-link text-white">Profile</a>
-        </li>
-        <li *ngIf="isLoggedIn === true" class="nav-item logout">
-          <a class="nav-link text-white" (click)="Logout()">Logout</a>
-        </li>
-        <li *ngIf="isAdmin === true" class="nav-item logout" [routerLink]="['admin-panel']">
-          <a class="nav-link text-white">Admin Panel</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+    </ul>
+  </div>
+</div>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_P34.DTO.Models
 {
-    class ReviewDTO
+    public class ReviewDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }

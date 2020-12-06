@@ -16,6 +16,8 @@ using Project_P34.Domain;
 using Project_P34.Domain.Interfaces;
 using System;
 using System.Text;
+using AutoMapper;
+using Project_P34.API_Angular.MappingProfiles;
 
 namespace Project_P34.API_Angular
 {
@@ -42,6 +44,7 @@ namespace Project_P34.API_Angular
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IJWTTokenService, JWTTokenService>();
+            services.AddAutoMapper(typeof(MappingProfile));
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecretPhrase")));
 

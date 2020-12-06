@@ -17,6 +17,5 @@ namespace Project_P34.DTO.Models
         public int BirthYear { get; set; }
         public int Age { get; set; }
         public string PictureUrl { get; set; }
-        public virtual List<Movie> actorFilms { get; set; }
     }
 }
